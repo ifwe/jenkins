@@ -1406,7 +1406,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      */
     /*package*/ static void waitForCheckpoint(CheckPoint id, @CheckForNull BuildListener listener, @CheckForNull String waiter) throws InterruptedException {
         while(true) {
-            Run b = RunnerStack.INSTANCE.peek().getBuild().getPreviousBuildInProgress();
+            Run b = RunnerStack.INSTANCE.peek().getBuild().getPreviousNotFailedBuild();
             if(b==null)     return; // no pending earlier build
             Run.RunExecution runner = b.runner;
             if(runner==null) {
